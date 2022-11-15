@@ -1,0 +1,57 @@
+stages:       
+  - test-1
+  - test-2
+  - deploy
+
+test-app-code:
+  image: node:14
+  stage: test-1
+  script:
+    - git clone https://github.com/runni2/devops-lab
+    - cd devops-lab
+    - npm install
+    - npm start &
+    - sleep 4
+    - curl localhost:3000
+  tags:
+    - runner1
+
+  artifacts:
+    paths:
+      - devops-lab
+    expire_in: 1 days
+
+test-docker-compose:
+ image: docker
+ stage: test-2
+ services:
+   - docker:dind
+ script:
+   - cd devops-lab
+   - docker-compose up -d
+
+deploy-server1:
+  when: manual
+  stage: deploy
+  before_script:
+    - chmod 400 $SSH_KEY
+  script: 
+    - ssh -o StrictHostKeyChecking=no -i $SSH_KEY rastarure@20.18.43.47 "
+        sudo apt-get install git -y &&
+        cd devops-lab &&
+        sudo docker compose up -d"
+  tags:
+    - runner1
+
+deploy-server2:
+  when: manual
+  stage: deploy
+  before_script:
+    - chmod 400 $SSH_KEY
+  script: 
+    - ssh -o StrictHostKeyChecking=no -i $SSH_KEY rastarure@20.18.43.49 "
+        sudo apt-get install git -y && 
+        cd devops-lab &&
+        sudo docker compose up -d"
+  tags:
+    - runner1
