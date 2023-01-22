@@ -6,7 +6,7 @@ This is small nodejs lab of devops
 - Ansible
 - Terraform
 - Gitlab CI/CD
-- AWS
+- Azure
 
 # first we should test our code in local
 clone repo $ git clone https://github.com/nyeinchan4/devops-small-lab.git
