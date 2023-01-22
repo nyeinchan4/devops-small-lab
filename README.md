@@ -56,7 +56,7 @@ $ ansible-playbook install-docker.yaml
 
 after that you have already installed docker on deploy server
 
-#Last step is to run CI/CD on gitlab 
+# Last step is to run CI/CD on gitlab 
 
 go to gitlab-cidd dir and copy .gitlab-ci.yml and past on your
 gitlab cicd file
