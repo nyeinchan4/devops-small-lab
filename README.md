@@ -33,8 +33,8 @@ $ curl localhost:3333
 # create 2 deployment VM on Azure with terraform 
 
 before use terraform prepare for some requirement
-- need to have Azure
-- install terraform and also aws cli for Auth.. 
+- need to have Azure account
+- install terraform and also Azure cli for Auth.. 
 - and then form Azure cli auth with your Azure account
 
 go to terraform dir 
